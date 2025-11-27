@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - MR. WAKEEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .status-active {
+            background-color: #10b981;
+            color: white;
+        }
+        .status-pending {
+            background-color: #f59e0b;
+            color: white;
+        }
+        .status-completed {
+            background-color: #6b7280;
+            color: white;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-blue-900">MR. WAKEEL</h1>
+                        <p class="text-xs text-gray-600">Legal Marketplace Pakistan</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-900">Home</a>
+                    <a href="directory.html" class="text-gray-700 hover:text-blue-900">Find Lawyers</a>
+                    <a href="submission.html" class="text-gray-700 hover:text-blue-900">Submit Case</a>
+                    <a href="dashboard.html" class="text-blue-900 font-medium">Dashboard</a>
+                    <a href="about.html" class="text-gray-700 hover:text-blue-900">About</a>
+                    <button class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">Get Legal Help</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="bg-blue-900 text-white pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold mb-2">Client Dashboard</h1>
+                    <p class="text-blue-200">Welcome back, Muhammad Ali</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-blue-200 text-sm">Active Cases</p>
+                    <p class="text-3xl font-bold">3</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-folder-open text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm">Total Cases</p>
+                            <p class="text-2xl font-bold text-gray-800">8</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-clock text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm">Active Cases</p>
+                            <p class="text-2xl font-bold text-gray-800">3</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-check-circle text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm">Completed</p>
+                            <p class="text-2xl font-bold text-gray-800">5</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl card-shadow p-6">
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-calendar-alt text-red-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-600 text-sm">Upcoming Hearings</p>
+                            <p class="text-2xl font-bold text-gray-800">2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Main Content -->
+                <div class="lg:col-span-2 space-y-8">
+                    
+                    <!-- Active Cases -->
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-xl font-bold text-gray-800">Active Cases</h2>
+                            <button class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 text-sm">
+                                <i class="fas fa-plus mr-2"></i>New Case
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            
+                            <!-- Case 1 -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-semibold text-gray-800">Property Dispute Case</h3>
+                                    <span class="status-active px-3 py-1 rounded-full text-xs font-medium">
+                                        Active
+                                    </span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                    <div>
+                                        <span class="text-gray-600">Lawyer:</span>
+                                        <span class="font-medium text-gray-800 ml-2">Adv. Ayesha Siddiqui</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Case ID:</span>
+                                        <span class="font-medium text-gray-800 ml-2">#MW-2024-001</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Next Hearing:</span>
+                                        <span class="font-medium text-gray-800 ml-2">Dec 15, 2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Status:</span>
+                                        <span class="font-medium text-blue-600 ml-2">Evidence Collection</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700">
+                                        View Details
+                                    </button>
+                                    <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-xs hover:bg-gray-50">
+                                        <i class="fab fa-whatsapp mr-1"></i>Chat
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Case 2 -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-semibold text-gray-800">Criminal Defense Case</h3>
+                                    <span class="status-pending px-3 py-1 rounded-full text-xs font-medium">
+                                        Pending
+                                    </span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                    <div>
+                                        <span class="text-gray-600">Lawyer:</span>
+                                        <span class="font-medium text-gray-800 ml-2">Adv. Ahmed Khan</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Case ID:</span>
+                                        <span class="font-medium text-gray-800 ml-2">#MW-2024-002</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Next Hearing:</span>
+                                        <span class="font-medium text-gray-800 ml-2">Dec 18, 2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Status:</span>
+                                        <span class="font-medium text-yellow-600 ml-2">Bail Application</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700">
+                                        View Details
+                                    </button>
+                                    <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-xs hover:bg-gray-50">
+                                        <i class="fab fa-whatsapp mr-1"></i>Chat
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Case 3 -->
+                            <div class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                                <div class="flex items-center justify-between mb-3">
+                                    <h3 class="font-semibold text-gray-800">Business Contract Review</h3>
+                                    <span class="status-active px-3 py-1 rounded-full text-xs font-medium">
+                                        Active
+                                    </span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                    <div>
+                                        <span class="text-gray-600">Lawyer:</span>
+                                        <span class="font-medium text-gray-800 ml-2">Adv. Hassan Raza</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Case ID:</span>
+                                        <span class="font-medium text-gray-800 ml-2">#MW-2024-003</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Deadline:</span>
+                                        <span class="font-medium text-gray-800 ml-2">Dec 20, 2024</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600">Status:</span>
+                                        <span class="font-medium text-green-600 ml-2">Document Review</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700">
+                                        View Details
+                                    </button>
+                                    <button class="border border-gray-300 text-gray-700 px-3 py-1 rounded text-xs hover:bg-gray-50">
+                                        <i class="fab fa-whatsapp mr-1"></i>Chat
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Case Progress Chart -->
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Case Progress Overview</h2>
+                        <div id="progressChart" style="height: 300px;"></div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <button class="w-full bg-emerald-600 text-white py-2 px-4 rounded-lg hover:bg-emerald-700 text-sm">
+                                <i class="fas fa-plus mr-2"></i>Submit New Case
+                            </button>
+                            <button class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 text-sm">
+                                <i class="fas fa-search mr-2"></i>Find Lawyer
+                            </button>
+                            <button class="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 text-sm">
+                                <i class="fas fa-calendar mr-2"></i>Schedule Consultation
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Events -->
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Upcoming Events</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 bg-red-500 rounded-full mt-2 mr-3"></div>
+                                <div>
+                                    <p class="font-medium text-gray-800 text-sm">Property Case Hearing</p>
+                                    <p class="text-xs text-gray-600">Dec 15, 2024 • 10:00 AM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                                <div>
+                                    <p class="font-medium text-gray-800 text-sm">Client Meeting</p>
+                                    <p class="text-xs text-gray-600">Dec 16, 2024 • 2:00 PM</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mt-2 mr-3"></div>
+                                <div>
+                                    <p class="font-medium text-gray-800 text-sm">Contract Review Deadline</p>
+                                    <p class="text-xs text-gray-600">Dec 20, 2024 • 5:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-white rounded-xl card-shadow p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4">Recent Activity</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fas fa-file-alt text-blue-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-800">Document uploaded</p>
+                                    <p class="text-xs text-gray-600">Property deed uploaded to case #MW-2024-001</p>
+                                    <p class="text-xs text-gray-500">2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fas fa-comment text-green-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-800">New message</p>
+                                    <p class="text-xs text-gray-600">Adv. Ahmed Khan sent a message</p>
+                                    <p class="text-xs text-gray-500">4 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fas fa-calendar text-purple-600 text-xs"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-800">Hearing scheduled</p>
+                                    <p class="text-xs text-gray-600">New hearing date for criminal case</p>
+                                    <p class="text-xs text-gray-500">1 day ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Assistant -->
+                    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-robot text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-bold mb-2">AI Legal Assistant</h3>
+                            <p class="text-sm text-blue-100 mb-4">
+                                Get instant answers to your legal questions
+                            </p>
+                            <button class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-100 text-sm font-medium">
+                                Ask AI Assistant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float">
+        <button class="bg-green-500 text-white w-16 h-16 rounded-full shadow-lg hover:bg-green-600 flex items-center justify-center">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-4">MR. WAKEEL</h3>
+                <p class="text-blue-200 mb-6">Pakistan's First AI-Powered Legal Marketplace</p>
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-blue-200 hover:text-white">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-blue-200 hover:text-white">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-blue-200 hover:text-white">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                <p class="text-blue-200 text-sm">© 2024 MR. WAKEEL. All rights reserved. | Pakistan's Legal Tech Platform</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // WhatsApp float button
+        document.querySelector('.whatsapp-float button').addEventListener('click', function() {
+            window.open('https://wa.me/923000000000', '_blank');
+        });
+
+        // Quick Actions
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Submit New Case')) {
+                button.addEventListener('click', function() {
+                    window.location.href = 'submission.html';
+                });
+            } else if (button.textContent.includes('Find Lawyer')) {
+                button.addEventListener('click', function() {
+                    window.location.href = 'directory.html';
+                });
+            } else if (button.textContent.includes('Ask AI Assistant')) {
+                button.addEventListener('click', function() {
+                    alert('AI Assistant feature coming soon!');
+                });
+            }
+        });
+
+        // Case Progress Chart
+        const caseData = [{
+            x: ['Property Dispute', 'Criminal Defense', 'Contract Review', 'Completed Cases'],
+            y: [75, 45, 60, 100],
+            type: 'bar',
+            marker: {
+                color: ['#3b82f6', '#f59e0b', '#10b981', '#6b7280']
+            }
+        }];
+
+        const layout = {
+            title: {
+                text: 'Case Progress (%)',
+                font: { size: 16 }
+            },
+            xaxis: { 
+                title: 'Cases',
+                tickangle: -45
+            },
+            yaxis: { 
+                title: 'Progress (%)',
+                range: [0, 100]
+            },
+            margin: { t: 50, b: 100, l: 60, r: 40 },
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            paper_bgcolor: 'rgba(0,0,0,0)'
+        };
+
+        Plotly.newPlot('progressChart', caseData, layout, {responsive: true});
+
+        // Chat buttons
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Chat')) {
+                button.addEventListener('click', function() {
+                    window.open('https://wa.me/923000000000', '_blank');
+                });
+            }
+        });
+    </script>
+<script>
+    document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>
