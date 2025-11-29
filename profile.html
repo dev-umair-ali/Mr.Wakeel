@@ -390,6 +390,28 @@
             e.preventDefault();
         }
     });
+
+      // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // WhatsApp float button click
+        document.querySelector('.whatsapp-float button').addEventListener('click', function() {
+            window.open('https://wa.me/923000000000 ', '_blank');
+        });
+
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
 </script>
 </body>
 </html>
